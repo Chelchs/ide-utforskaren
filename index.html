@@ -4,6 +4,11 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Receptsamlingen</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@400;500;700&display=swap"
+  rel="stylesheet">
       <link rel="stylesheet" href="style.css">
   </head>
   <body>
@@ -40,11 +45,13 @@
 
               <!-- Länk-formulär -->
               <form id="link-form" class="recipe-form">
-                  <label for="link-title">Namn på receptet</label>
-                  <input type="text" id="link-title" required placeholder="T.ex. Pasta Carbonara">
-
                   <label for="link-url">Länk till receptet</label>
                   <input type="url" id="link-url" required placeholder="https://...">
+                  <div id="scrape-status"></div>
+                  <div id="scrape-preview" hidden></div>
+
+                  <label for="link-title">Namn på receptet</label>
+                  <input type="text" id="link-title" required placeholder="T.ex. Pasta Carbonara">
 
                   <label for="link-image">Länk till en bild (valfritt)</label>
                   <input type="url" id="link-image" placeholder="https://...">
@@ -57,6 +64,11 @@
                       <option value="Fika">Fika</option>
                       <option value="Övrigt">Övrigt</option>
                   </select>
+
+                  <div class="checkbox-row">
+                      <input type="checkbox" id="link-easy">
+                      <label for="link-easy">Enkelt att laga</label>
+                  </div>
 
                   <button type="submit">Spara recept</button>
               </form>
@@ -84,17 +96,28 @@
                       <option value="Övrigt">Övrigt</option>
                   </select>
 
+                  <div class="checkbox-row">
+                      <input type="checkbox" id="own-easy">
+                      <label for="own-easy">Enkelt att laga</label>
+                  </div>
+
                   <button type="submit">Spara recept</button>
               </form>
           </div>
       </div>
 
-      <!-- Modal för att visa eget recept -->
+      <!-- Modal för att visa recept -->
       <div id="recipe-modal" class="modal" hidden>
           <div class="modal-content">
               <button id="close-recipe-modal" class="close-btn">&times;</button>
               <h2 id="recipe-modal-title"></h2>
               <div id="recipe-modal-body"></div>
+              <div class="notes-section">
+                  <h3>Mina anteckningar</h3>
+                  <textarea id="recipe-notes" rows="3" placeholder="Skriv dina anteckningar här..."></textarea>
+                  <button id="save-notes-btn">Spara anteckningar</button>
+                  <span class="notes-saved" id="notes-saved-msg">Sparat!</span>
+              </div>
           </div>
       </div>
 
