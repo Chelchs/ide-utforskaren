@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idéutforskaren</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <h1>Hej Christina!</h1>
+            <p>Svara på frågorna nedan — skriv det som kommer upp. Det behöver inte vara perfekt. Dina svar hjälper oss hitta ett projekt som passar dig.</p>
+        </section>
+
+        <form id="idea-form">
+            <div class="question-card">
+                <label for="q1">Vad lägger du mest tid på i ditt jobb som du önskar gick snabbare?</label>
+                <textarea id="q1" name="q1" rows="4" placeholder="Skriv fritt..."></textarea>
+            </div>
+
+            <div class="question-card">
+                <label for="q2">Finns det något du gör om och om igen som känns onödigt eller repetitivt?</label>
+                <textarea id="q2" name="q2" rows="4" placeholder="Skriv fritt..."></textarea>
+            </div>
+
+            <div class="question-card">
+                <label for="q3">Vad är det jobbigaste med att hålla koll på allt i ditt kommunikationsarbete?</label>
+                <textarea id="q3" name="q3" rows="4" placeholder="Skriv fritt..."></textarea>
+            </div>
+
+            <div class="question-card">
+                <label for="q4">Om du hade en assistent som kunde bygga vad som helst åt dig — vad skulle du be om först?</label>
+                <textarea id="q4" name="q4" rows="4" placeholder="Skriv fritt..."></textarea>
+            </div>
+
+            <div class="question-card">
+                <label for="q5">Finns det någon information du ofta letar efter men har svårt att hitta snabbt?</label>
+                <textarea id="q5" name="q5" rows="4" placeholder="Skriv fritt..."></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn">Skicka svar</button>
+            <p id="status-message" class="status" hidden></p>
+        </form>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
