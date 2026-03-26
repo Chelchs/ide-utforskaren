@@ -165,10 +165,7 @@
       margin-top: 48px;
   }
 
-  .modal[hidden] {
-      display: none;
-  }
-
+  /* Modal */
   .modal {
       position: fixed;
       top: 0;
