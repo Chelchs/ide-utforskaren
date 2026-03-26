@@ -1,6 +1,9 @@
   const SUPABASE_URL = 'https://sdopceflhqvkqcfmubyh.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkb3BjZWZsaHF2a3FjZm11Ynl
-  oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MjUwMTYsImV4cCI6MjA5MDEwMTAxNn0.ALQ_FDV07ozPLzXp9UwBBC9eNTuZSNq0hXscaWkFBOA';
+  const SUPABASE_KEY =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' +
+      '.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNkb3BjZWZsaHF2a3FjZm11Ynlo' +
+      'Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MjUwMTYsImV4cCI6MjA5MDEwMTAxNn0' +
+      '.ALQ_FDV07ozPLzXp9UwBBC9eNTuZSNq0hXscaWkFBOA';
 
   const recipesContainer = document.getElementById('recipes');
   const emptyMessage = document.getElementById('empty-message');
@@ -16,6 +19,7 @@
 
   let currentFilter = 'alla';
 
+  // Visa/dölj modal
   addBtn.addEventListener('click', () => { modal.hidden = false; });
   closeModal.addEventListener('click', () => { modal.hidden = true; });
   closeRecipeModal.addEventListener('click', () => { recipeModal.hidden = true; });
@@ -27,6 +31,7 @@
       if (e.target === recipeModal) recipeModal.hidden = true;
   });
 
+  // Tabbar (länk / eget recept)
   tabs.forEach(tab => {
       tab.addEventListener('click', () => {
           tabs.forEach(t => t.classList.remove('active'));
@@ -41,6 +46,7 @@
       });
   });
 
+  // Filter
   filters.forEach(filter => {
       filter.addEventListener('click', () => {
           filters.forEach(f => f.classList.remove('active'));
@@ -50,6 +56,7 @@
       });
   });
 
+  // Spara länk-recept
   linkForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const recipe = {
@@ -66,6 +73,7 @@
       loadRecipes();
   });
 
+  // Spara eget recept
   ownForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const recipe = {
@@ -181,4 +189,5 @@
       recipeModal.hidden = false;
   }
 
+  // Ladda recept vid start
   loadRecipes();
