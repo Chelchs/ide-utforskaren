@@ -3,51 +3,100 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Idéutforskaren</title>
+      <title>Receptsamlingen</title>
       <link rel="stylesheet" href="style.css">
   </head>
   <body>
+      <header>
+          <h1>Receptsamlingen</h1>
+          <p>Dina favoritrecept på ett ställe</p>
+          <button id="add-btn">+ Lägg till recept</button>
+      </header>
+
       <main>
-          <section class="hero">
-              <h1>Idéutforskaren</h1>
-              <p>De bästa idéerna gömmer sig ofta i vardagen — i saker som irriterar dig, saker du önskar fanns, eller
-  saker du gör utan att tänka på det. Svara på frågorna nedan. Skriv det som kommer upp, det behöver inte vara
-  perfekt.</p>
-          </section>
+          <div class="filter-bar">
+              <button class="filter active" data-category="alla">Alla</button>
+              <button class="filter" data-category="Frukost">Frukost</button>
+              <button class="filter" data-category="Lunch">Lunch</button>
+              <button class="filter" data-category="Middag">Middag</button>
+              <button class="filter" data-category="Fika">Fika</button>
+              <button class="filter" data-category="Övrigt">Övrigt</button>
+          </div>
 
-          <form id="idea-form">
-              <div class="question-card">
-                  <label for="q1">Vad irriterar dig i vardagen? Något som borde vara enklare, smidigare eller bara
-  fungera bättre?</label>
-                  <textarea id="q1" name="q1" rows="4" placeholder="Skriv fritt..."></textarea>
-              </div>
-
-              <div class="question-card">
-                  <label for="q2">Finns det något du önskar att du kunde köpa eller använda — men som inte verkar
-  finnas?</label>
-                  <textarea id="q2" name="q2" rows="4" placeholder="Skriv fritt..."></textarea>
-              </div>
-
-              <div class="question-card">
-                  <label for="q3">Vad är du bra på eller vet mycket om — saker folk frågar dig om råd kring?</label>
-                  <textarea id="q3" name="q3" rows="4" placeholder="Skriv fritt..."></textarea>
-              </div>
-
-              <div class="question-card">
-                  <label for="q4">Vilka appar, tjänster eller produkter använder du ofta? Finns det något du saknar i
-  dem?</label>
-                  <textarea id="q4" name="q4" rows="4" placeholder="Skriv fritt..."></textarea>
-              </div>
-
-              <div class="question-card">
-                  <label for="q5">Om du fick obegränsad tid och pengar — vad skulle du bygga eller skapa?</label>
-                  <textarea id="q5" name="q5" rows="4" placeholder="Skriv fritt..."></textarea>
-              </div>
-
-              <button type="submit" id="submit-btn">Skicka svar</button>
-              <p id="status-message" class="status" hidden></p>
-          </form>
+          <div id="recipes" class="recipe-grid"></div>
+          <p id="empty-message" class="empty" hidden>Inga recept ännu. Klicka på "+ Lägg till recept" för att börja!</p>
       </main>
+
+      <!-- Modal för att lägga till recept -->
+      <div id="modal" class="modal" hidden>
+          <div class="modal-content">
+              <button id="close-modal" class="close-btn">&times;</button>
+              <h2>Lägg till recept</h2>
+
+              <div class="tab-bar">
+                  <button class="tab active" data-tab="link">Spara länk</button>
+                  <button class="tab" data-tab="own">Skriv eget recept</button>
+              </div>
+
+              <!-- Länk-formulär -->
+              <form id="link-form" class="recipe-form">
+                  <label for="link-title">Namn på receptet</label>
+                  <input type="text" id="link-title" required placeholder="T.ex. Pasta Carbonara">
+
+                  <label for="link-url">Länk till receptet</label>
+                  <input type="url" id="link-url" required placeholder="https://...">
+
+                  <label for="link-image">Länk till en bild (valfritt)</label>
+                  <input type="url" id="link-image" placeholder="https://...">
+
+                  <label for="link-category">Kategori</label>
+                  <select id="link-category">
+                      <option value="Middag">Middag</option>
+                      <option value="Lunch">Lunch</option>
+                      <option value="Frukost">Frukost</option>
+                      <option value="Fika">Fika</option>
+                      <option value="Övrigt">Övrigt</option>
+                  </select>
+
+                  <button type="submit">Spara recept</button>
+              </form>
+
+              <!-- Eget recept-formulär -->
+              <form id="own-form" class="recipe-form" hidden>
+                  <label for="own-title">Namn på receptet</label>
+                  <input type="text" id="own-title" required placeholder="T.ex. Mormors köttbullar">
+
+                  <label for="own-ingredients">Ingredienser</label>
+                  <textarea id="own-ingredients" rows="5" required placeholder="En ingrediens per rad..."></textarea>
+
+                  <label for="own-instructions">Instruktioner</label>
+                  <textarea id="own-instructions" rows="5" required placeholder="Beskriv hur man gör..."></textarea>
+
+                  <label for="own-image">Länk till en bild (valfritt)</label>
+                  <input type="url" id="own-image" placeholder="https://...">
+
+                  <label for="own-category">Kategori</label>
+                  <select id="own-category">
+                      <option value="Middag">Middag</option>
+                      <option value="Lunch">Lunch</option>
+                      <option value="Frukost">Frukost</option>
+                      <option value="Fika">Fika</option>
+                      <option value="Övrigt">Övrigt</option>
+                  </select>
+
+                  <button type="submit">Spara recept</button>
+              </form>
+          </div>
+      </div>
+
+      <!-- Modal för att visa eget recept -->
+      <div id="recipe-modal" class="modal" hidden>
+          <div class="modal-content">
+              <button id="close-recipe-modal" class="close-btn">&times;</button>
+              <h2 id="recipe-modal-title"></h2>
+              <div id="recipe-modal-body"></div>
+          </div>
+      </div>
 
       <script src="app.js"></script>
   </body>
